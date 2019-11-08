@@ -1,12 +1,28 @@
 <?php
-/**
- * ${NAMESPACE}\Supermarket.php
- *
- * {Добавить описание файла тут}
- *
- * @author Якушев Антон <yakushev-ay@yandex.ru>
- * @copyright ООО Бонусмолл
- * @package ${NAMESPACE}
- * Date: 08.11.2019
- * Time: 10:00
- */
+
+class Supermarket
+{
+    /** @var array начальные настройки магазина */
+    private $_settings;
+    
+    public function __construct($settings)
+    {
+        $this->_settings = $settings;
+        $this->init();
+    }
+    
+    /**
+     * Инициализирует начальное состояние магазина
+     */
+    private function init()
+    {
+    
+    }
+    
+    public function calculateModel()
+    {
+        $res = [];
+        
+        return $res;
+    }
+}
