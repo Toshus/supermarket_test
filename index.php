@@ -4,6 +4,8 @@ use Supermarket\Supermarket;
 
 include_once 'vendor/autoload.php';
 
-$supermarket = new Supermarket();
+$config = include 'config.php';
+
+$supermarket = new Supermarket($config);
 
 echo $supermarket->calculateModel();
