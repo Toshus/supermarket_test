@@ -1,11 +1,13 @@
 <?php
 
+namespace Supermarket;
+
 class Supermarket
 {
     /** @var array начальные настройки магазина */
     private $_settings;
     
-    public function __construct($settings)
+    public function __construct($settings = null)
     {
         $this->_settings = $settings;
         $this->init();
@@ -21,7 +23,7 @@ class Supermarket
     
     public function calculateModel()
     {
-        $res = [];
+        $res = 'Hello World!';
         
         return $res;
     }
