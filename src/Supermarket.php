@@ -2,16 +2,27 @@
 
 namespace Supermarket;
 
+/**
+ * Class Supermarket
+ * Представляет супермаркет и управляет кассами и покупателями
+ * @package Supermarket
+ */
 class Supermarket
 {
+    /** @var int количество тиков в часе */
     const HOUR_SECONDS = 3600;
     
     /** @var array начальные настройки магазина */
     private $_settings;
     
+    /** @var array массив касс в магазине */
     private $_cashboxes;
     
-    public function __construct($settings = null)
+    /**
+     * Supermarket constructor.
+     * @param null $settings
+     */
+    public function __construct(array $settings = null)
     {
         $this->_settings = $settings;
         $this->init();
@@ -53,15 +64,19 @@ class Supermarket
         if (!isset($this->_settings['work_start'])) {
             throw new SupermarketException('Ошибка: ожидается параметр work_start');
         }
+        
         if ($this->_settings['work_start'] < 0) {
             throw new SupermarketException('Ошибка: Параметр work_start должен быть целым положительным числом');
         }
+        
         if (!isset($this->_settings['work_end'])) {
             throw new SupermarketException('Ошибка: ожидается параметр work_end');
         }
+        
         if ($this->_settings['work_end'] < 0) {
             throw new SupermarketException('Ошибка: Параметр work_end должен быть целым положительным числом');
         }
+        
         if ($this->_settings['work_start'] > $this->_settings['work_end']) {
             throw new SupermarketException('Ошибка: Параметр work_start должен быть больше параметра work_end');
         }
@@ -76,7 +91,13 @@ class Supermarket
         return $res;
     }
     
-    private function tick($tm)
+    /**
+     * Отрабатывает расчеты по модели за один тик (1 сек)
+     * @param int $tm
+     * @return string
+     * @throws CustomerException
+     */
+    private function tick(int $tm)
     {
         // 1. Делаем снимок состояния
         $res = $this->printState($tm);
@@ -91,10 +112,11 @@ class Supermarket
     }
     
     /**
-     * @param $tm
+     * Каждый час (3600 тиков) формирует снимок состояния для вывода на экран
+     * @param int $tm
      * @return string
      */
-    private function printState($tm)
+    private function printState(int $tm)
     {
         $res = '';
         if (($tm % self::HOUR_SECONDS) === 0) {
@@ -129,6 +151,7 @@ class Supermarket
     }
     
     /**
+     * Ищет подходящую кассу для покупателя
      * @return Cashbox|null
      */
     private function getEligibleCashbox()
@@ -174,7 +197,11 @@ class Supermarket
         return $eligibleCashbox;
     }
     
-    private function processCashboxes($tm)
+    /**
+     * Запускает по каждой открытой кассе обсчет обслуживания покупателя
+     * @param int $tm
+     */
+    private function processCashboxes(int $tm)
     {
         /** @var Cashbox $cashbox */
         foreach ($this->_cashboxes as $cashbox) {

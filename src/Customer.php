@@ -30,9 +30,9 @@ class Customer
     
     /**
      * Customer constructor.
-     * @param $goods
+     * @param int $goods
      */
-    public function __construct($goods)
+    public function __construct(int $goods)
     {
         $this->_goods = $goods;
         $this->_state = self::STATE_SHOPPING;
@@ -59,6 +59,7 @@ class Customer
     }
     
     /**
+     * Переводит покупателя в состояние обслуживания кассиром
      * @param int $tm
      */
     public function startServe(int $tm)
@@ -69,11 +70,17 @@ class Customer
         }
     }
     
+    /**
+     * @return int
+     */
     public function getBuyStartTime()
     {
         return $this->_buy_start_time;
     }
     
+    /**
+     * @return int|int
+     */
     public function getGoodsCount()
     {
         return $this->_goods;

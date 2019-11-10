@@ -2,10 +2,18 @@
 
 namespace Supermarket;
 
+/**
+ * Class Cashbox
+ * Реализует функциональность кассы в супермаркете
+ * @package Supermarket
+ */
 class Cashbox
 {
+    /** @var int Касса закрыта */
     const STATE_CLOSED = 1;
+    /** @var int Касса открыта и работает */
     const STATE_OPENED = 2;
+    /** @var int Касса открыти и ждет покупателей */
     const STATE_STANDBY = 3;
     
     /** @var integer состояние кассы */
@@ -23,6 +31,11 @@ class Cashbox
     /** @var int время начала ожидания покупателей */
     private $_standby_start_time;
     
+    /**
+     * Cashbox constructor.
+     * @param int $id номер кассы
+     * @param array $settings настройки кассы
+     */
     public function __construct(int $id, array $settings)
     {
         $this->_id = $id;
